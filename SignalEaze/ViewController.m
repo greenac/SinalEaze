@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SEGaugeView.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    SEGaugeView *gaugeView = [[SEGaugeView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    gaugeView.center = self.view.center;
+    [self.view addSubview:gaugeView];
 }
 
 - (void)didReceiveMemoryWarning {
