@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@import CoreBluetooth;
+@import QuartzCore;
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
+
 
 
 @end

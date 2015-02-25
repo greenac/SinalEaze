@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654E90251A9D1ABA00547288 /* SESegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E90241A9D1ABA00547288 /* SESegment.m */; };
 		658B8C611A8D7CAC002E2179 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C601A8D7CAC002E2179 /* main.m */; };
 		658B8C641A8D7CAC002E2179 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C631A8D7CAC002E2179 /* AppDelegate.m */; };
 		658B8C671A8D7CAC002E2179 /* SignalEaze.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C651A8D7CAC002E2179 /* SignalEaze.xcdatamodeld */; };
@@ -16,6 +17,8 @@
 		658B8C721A8D7CAC002E2179 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658B8C701A8D7CAC002E2179 /* LaunchScreen.xib */; };
 		658B8C7E1A8D7CAC002E2179 /* SignalEazeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C7D1A8D7CAC002E2179 /* SignalEazeTests.m */; };
 		658B8C891A8D7D8B002E2179 /* SEGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C881A8D7D8B002E2179 /* SEGaugeView.m */; };
+		65D3970F1A8FA3A000F9C708 /* TickMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D3970E1A8FA3A000F9C708 /* TickMarkView.m */; };
+		65D397121A8FCAC400F9C708 /* SEGaugeViewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D397111A8FCAC400F9C708 /* SEGaugeViewBackground.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		654E90231A9D1ABA00547288 /* SESegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESegment.h; sourceTree = "<group>"; };
+		654E90241A9D1ABA00547288 /* SESegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESegment.m; sourceTree = "<group>"; };
 		658B8C5B1A8D7CAC002E2179 /* SignalEaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalEaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		658B8C5F1A8D7CAC002E2179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658B8C601A8D7CAC002E2179 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,6 +50,10 @@
 		658B8C7D1A8D7CAC002E2179 /* SignalEazeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignalEazeTests.m; sourceTree = "<group>"; };
 		658B8C871A8D7D8B002E2179 /* SEGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeView.h; sourceTree = "<group>"; };
 		658B8C881A8D7D8B002E2179 /* SEGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeView.m; sourceTree = "<group>"; };
+		65D3970D1A8FA3A000F9C708 /* TickMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TickMarkView.h; sourceTree = "<group>"; };
+		65D3970E1A8FA3A000F9C708 /* TickMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TickMarkView.m; sourceTree = "<group>"; };
+		65D397101A8FCAC400F9C708 /* SEGaugeViewBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeViewBackground.h; sourceTree = "<group>"; };
+		65D397111A8FCAC400F9C708 /* SEGaugeViewBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeViewBackground.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +95,12 @@
 		658B8C5D1A8D7CAC002E2179 /* SignalEaze */ = {
 			isa = PBXGroup;
 			children = (
+				654E90231A9D1ABA00547288 /* SESegment.h */,
+				654E90241A9D1ABA00547288 /* SESegment.m */,
+				65D397101A8FCAC400F9C708 /* SEGaugeViewBackground.h */,
+				65D397111A8FCAC400F9C708 /* SEGaugeViewBackground.m */,
+				65D3970D1A8FA3A000F9C708 /* TickMarkView.h */,
+				65D3970E1A8FA3A000F9C708 /* TickMarkView.m */,
 				658B8C621A8D7CAC002E2179 /* AppDelegate.h */,
 				658B8C631A8D7CAC002E2179 /* AppDelegate.m */,
 				658B8C871A8D7D8B002E2179 /* SEGaugeView.h */,
@@ -176,6 +191,7 @@
 				TargetAttributes = {
 					658B8C5A1A8D7CAC002E2179 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = MRV65XK5WT;
 					};
 					658B8C761A8D7CAC002E2179 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -228,10 +244,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				658B8C641A8D7CAC002E2179 /* AppDelegate.m in Sources */,
+				654E90251A9D1ABA00547288 /* SESegment.m in Sources */,
 				658B8C671A8D7CAC002E2179 /* SignalEaze.xcdatamodeld in Sources */,
+				65D3970F1A8FA3A000F9C708 /* TickMarkView.m in Sources */,
 				658B8C6A1A8D7CAC002E2179 /* ViewController.m in Sources */,
 				658B8C611A8D7CAC002E2179 /* main.m in Sources */,
 				658B8C891A8D7D8B002E2179 /* SEGaugeView.m in Sources */,
+				65D397121A8FCAC400F9C708 /* SEGaugeViewBackground.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +309,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -331,6 +351,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -353,10 +374,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SignalEaze/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -364,10 +388,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SignalEaze/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -424,6 +451,7 @@
 				658B8C831A8D7CAC002E2179 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		658B8C841A8D7CAC002E2179 /* Build configuration list for PBXNativeTarget "SignalEazeTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +460,7 @@
 				658B8C861A8D7CAC002E2179 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

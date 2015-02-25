@@ -10,4 +10,6 @@
 
 @interface SEGaugeView : UIView
 
+- (id)initWithFrame:(CGRect)frame segments:(NSArray *)segments minValue:(CGFloat)minValue maxValue:(CGFloat)maxValue;
+
 @end
