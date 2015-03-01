@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GaugeSettings</key>
+	<dict>
+		<key>tachometer</key>
+		<dict>
+			<key>controllerId</key>
+			<integer>0</integer>
+			<key>minValue</key>
+			<integer>0</integer>
+			<key>maxValue</key>
+			<integer>3000</integer>
+			<key>minAngle</key>
+			<integer>30</integer>
+			<key>maxAngle</key>
+			<integer>330</integer>
+			<key>tics</key>
+			<integer>10</integer>
+			<key>subTics</key>
+			<integer>3</integer>
+			<key>displayName</key>
+			<string>TACH</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

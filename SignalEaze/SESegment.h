@@ -12,7 +12,7 @@
 @interface SESegment : NSObject
 
 - (id)initWithColor:(UIColor *)color start:(CGFloat)start end:(CGFloat)end;
-
++ (id)segmentWithColor:(UIColor *)color start:(CGFloat)start end:(CGFloat)end;
 - (CGFloat)startValue;
 - (CGFloat)endValue;
 - (UIColor *)segmentColor;

@@ -10,9 +10,10 @@
 @import CoreBluetooth;
 @import QuartzCore;
 
+#
 @interface ViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
 
-
+@property (nonatomic, assign)CGFloat angle;
 
 @end
 

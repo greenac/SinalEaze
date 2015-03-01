@@ -30,6 +30,11 @@
     return self;
 }
 
++ (id)segmentWithColor:(UIColor *)color start:(CGFloat)start end:(CGFloat)end
+{
+    return [[self alloc] initWithColor:color start:start end:end];
+}
+
 - (CGFloat)startValue
 {
     return self.start;

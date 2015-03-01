@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654017081AA29C9700182145 /* SEGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 654017071AA29C9700182145 /* SEGaugeView.m */; };
+		6540170B1AA29EB700182145 /* SEGaugeCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6540170A1AA29EB700182145 /* SEGaugeCircleView.m */; };
 		654E90251A9D1ABA00547288 /* SESegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E90241A9D1ABA00547288 /* SESegment.m */; };
+		654E90281A9E0C2B00547288 /* SENeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E90271A9E0C2B00547288 /* SENeedleView.m */; };
+		654E902B1A9E2D7900547288 /* SEGaugeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E902A1A9E2D7900547288 /* SEGaugeViewController.m */; };
 		658B8C611A8D7CAC002E2179 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C601A8D7CAC002E2179 /* main.m */; };
 		658B8C641A8D7CAC002E2179 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C631A8D7CAC002E2179 /* AppDelegate.m */; };
 		658B8C671A8D7CAC002E2179 /* SignalEaze.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C651A8D7CAC002E2179 /* SignalEaze.xcdatamodeld */; };
@@ -16,9 +20,10 @@
 		658B8C6F1A8D7CAC002E2179 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 658B8C6E1A8D7CAC002E2179 /* Images.xcassets */; };
 		658B8C721A8D7CAC002E2179 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658B8C701A8D7CAC002E2179 /* LaunchScreen.xib */; };
 		658B8C7E1A8D7CAC002E2179 /* SignalEazeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C7D1A8D7CAC002E2179 /* SignalEazeTests.m */; };
-		658B8C891A8D7D8B002E2179 /* SEGaugeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C881A8D7D8B002E2179 /* SEGaugeView.m */; };
+		658B8C891A8D7D8B002E2179 /* SEGaugeCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C881A8D7D8B002E2179 /* SEGaugeCurveView.m */; };
+		65B3EE9A1AA26F4700C9E159 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B3EE991AA26F4700C9E159 /* MainViewController.m */; };
+		65B3EE9E1AA2702B00C9E159 /* GaugeValues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B3EE9D1AA2702B00C9E159 /* GaugeValues.plist */; };
 		65D3970F1A8FA3A000F9C708 /* TickMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D3970E1A8FA3A000F9C708 /* TickMarkView.m */; };
-		65D397121A8FCAC400F9C708 /* SEGaugeViewBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D397111A8FCAC400F9C708 /* SEGaugeViewBackground.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +37,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		654017061AA29C9700182145 /* SEGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeView.h; sourceTree = "<group>"; };
+		654017071AA29C9700182145 /* SEGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeView.m; sourceTree = "<group>"; };
+		654017091AA29EB700182145 /* SEGaugeCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeCircleView.h; sourceTree = "<group>"; };
+		6540170A1AA29EB700182145 /* SEGaugeCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeCircleView.m; sourceTree = "<group>"; };
 		654E90231A9D1ABA00547288 /* SESegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SESegment.h; sourceTree = "<group>"; };
 		654E90241A9D1ABA00547288 /* SESegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SESegment.m; sourceTree = "<group>"; };
+		654E90261A9E0C2B00547288 /* SENeedleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SENeedleView.h; sourceTree = "<group>"; };
+		654E90271A9E0C2B00547288 /* SENeedleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SENeedleView.m; sourceTree = "<group>"; };
+		654E90291A9E2D7900547288 /* SEGaugeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeViewController.h; sourceTree = "<group>"; };
+		654E902A1A9E2D7900547288 /* SEGaugeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeViewController.m; sourceTree = "<group>"; };
 		658B8C5B1A8D7CAC002E2179 /* SignalEaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalEaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		658B8C5F1A8D7CAC002E2179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658B8C601A8D7CAC002E2179 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -48,12 +61,13 @@
 		658B8C771A8D7CAC002E2179 /* SignalEazeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignalEazeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658B8C7C1A8D7CAC002E2179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658B8C7D1A8D7CAC002E2179 /* SignalEazeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignalEazeTests.m; sourceTree = "<group>"; };
-		658B8C871A8D7D8B002E2179 /* SEGaugeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeView.h; sourceTree = "<group>"; };
-		658B8C881A8D7D8B002E2179 /* SEGaugeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeView.m; sourceTree = "<group>"; };
+		658B8C871A8D7D8B002E2179 /* SEGaugeCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeCurveView.h; sourceTree = "<group>"; };
+		658B8C881A8D7D8B002E2179 /* SEGaugeCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeCurveView.m; sourceTree = "<group>"; };
+		65B3EE981AA26F4700C9E159 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		65B3EE991AA26F4700C9E159 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		65B3EE9D1AA2702B00C9E159 /* GaugeValues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GaugeValues.plist; sourceTree = "<group>"; };
 		65D3970D1A8FA3A000F9C708 /* TickMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TickMarkView.h; sourceTree = "<group>"; };
 		65D3970E1A8FA3A000F9C708 /* TickMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TickMarkView.m; sourceTree = "<group>"; };
-		65D397101A8FCAC400F9C708 /* SEGaugeViewBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeViewBackground.h; sourceTree = "<group>"; };
-		65D397111A8FCAC400F9C708 /* SEGaugeViewBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeViewBackground.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,19 +109,28 @@
 		658B8C5D1A8D7CAC002E2179 /* SignalEaze */ = {
 			isa = PBXGroup;
 			children = (
+				65B3EE9D1AA2702B00C9E159 /* GaugeValues.plist */,
+				65B3EE981AA26F4700C9E159 /* MainViewController.h */,
+				65B3EE991AA26F4700C9E159 /* MainViewController.m */,
+				654E90291A9E2D7900547288 /* SEGaugeViewController.h */,
+				654E902A1A9E2D7900547288 /* SEGaugeViewController.m */,
 				654E90231A9D1ABA00547288 /* SESegment.h */,
 				654E90241A9D1ABA00547288 /* SESegment.m */,
-				65D397101A8FCAC400F9C708 /* SEGaugeViewBackground.h */,
-				65D397111A8FCAC400F9C708 /* SEGaugeViewBackground.m */,
 				65D3970D1A8FA3A000F9C708 /* TickMarkView.h */,
 				65D3970E1A8FA3A000F9C708 /* TickMarkView.m */,
 				658B8C621A8D7CAC002E2179 /* AppDelegate.h */,
 				658B8C631A8D7CAC002E2179 /* AppDelegate.m */,
-				658B8C871A8D7D8B002E2179 /* SEGaugeView.h */,
-				658B8C881A8D7D8B002E2179 /* SEGaugeView.m */,
+				658B8C871A8D7D8B002E2179 /* SEGaugeCurveView.h */,
+				658B8C881A8D7D8B002E2179 /* SEGaugeCurveView.m */,
+				654017091AA29EB700182145 /* SEGaugeCircleView.h */,
+				6540170A1AA29EB700182145 /* SEGaugeCircleView.m */,
+				654017061AA29C9700182145 /* SEGaugeView.h */,
+				654017071AA29C9700182145 /* SEGaugeView.m */,
 				658B8C681A8D7CAC002E2179 /* ViewController.h */,
 				658B8C691A8D7CAC002E2179 /* ViewController.m */,
 				658B8C6B1A8D7CAC002E2179 /* Main.storyboard */,
+				654E90261A9E0C2B00547288 /* SENeedleView.h */,
+				654E90271A9E0C2B00547288 /* SENeedleView.m */,
 				658B8C6E1A8D7CAC002E2179 /* Images.xcassets */,
 				658B8C701A8D7CAC002E2179 /* LaunchScreen.xib */,
 				658B8C651A8D7CAC002E2179 /* SignalEaze.xcdatamodeld */,
@@ -223,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B3EE9E1AA2702B00C9E159 /* GaugeValues.plist in Resources */,
 				658B8C6D1A8D7CAC002E2179 /* Main.storyboard in Resources */,
 				658B8C721A8D7CAC002E2179 /* LaunchScreen.xib in Resources */,
 				658B8C6F1A8D7CAC002E2179 /* Images.xcassets in Resources */,
@@ -243,14 +267,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				654E90281A9E0C2B00547288 /* SENeedleView.m in Sources */,
 				658B8C641A8D7CAC002E2179 /* AppDelegate.m in Sources */,
 				654E90251A9D1ABA00547288 /* SESegment.m in Sources */,
+				654017081AA29C9700182145 /* SEGaugeView.m in Sources */,
+				65B3EE9A1AA26F4700C9E159 /* MainViewController.m in Sources */,
 				658B8C671A8D7CAC002E2179 /* SignalEaze.xcdatamodeld in Sources */,
 				65D3970F1A8FA3A000F9C708 /* TickMarkView.m in Sources */,
 				658B8C6A1A8D7CAC002E2179 /* ViewController.m in Sources */,
+				6540170B1AA29EB700182145 /* SEGaugeCircleView.m in Sources */,
 				658B8C611A8D7CAC002E2179 /* main.m in Sources */,
-				658B8C891A8D7D8B002E2179 /* SEGaugeView.m in Sources */,
-				65D397121A8FCAC400F9C708 /* SEGaugeViewBackground.m in Sources */,
+				658B8C891A8D7D8B002E2179 /* SEGaugeCurveView.m in Sources */,
+				654E902B1A9E2D7900547288 /* SEGaugeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +409,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -395,6 +424,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
