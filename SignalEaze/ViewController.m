@@ -9,8 +9,12 @@
 #import "ViewController.h"
 #import "SEGaugeViewController.h"
 #import "SESegment.h"
+#import "SEGaugeCurveView.h"
+#import "SEGaugeCircleView.h"
+#import "SEGaugeCircleViewController.h"
+#import "SEGaugeCurveViewConroller.h"
 
-#define kPeriphialName  @"BLE Shield"
+#define kPeriphialName  @"SigEazeBLE"
 #define kPeriphialUIDD  @"713D0000-503E-4C75-BA94-3148F18D941E"
 #define kServiceUIDD    @"713D0002-503E-4C75-BA94-3148F18D941E"
 
@@ -41,9 +45,7 @@ typedef NS_ENUM(UInt8, SEDataId) {
     self.label.font = [UIFont boldSystemFontOfSize:20];
     [self.view addSubview:self.label];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:.15 alpha:1];
-    
-    
+    self.view.backgroundColor = [UIColor colorWithWhite:.1 alpha:1];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,7 +63,7 @@ typedef NS_ENUM(UInt8, SEDataId) {
     SESegment *segmentTach1 = [SESegment segmentWithColor:[UIColor greenColor] start:1800.0f end:2700.0f];
     SESegment *segmentTach2 = [SESegment segmentWithColor:[UIColor redColor] start:2700.0f end:3000.0f];
     
-    SEGaugeViewController *gaugeTach = [SEGaugeViewController new];
+    SEGaugeCircleViewController *gaugeTach = [SEGaugeCircleViewController new];
     gaugeTach.controllerId = SEGaugeViewControllerIdTach;
     gaugeTach.minValue = 0.0;
     gaugeTach.maxValue = 3000.0;
@@ -77,7 +79,7 @@ typedef NS_ENUM(UInt8, SEDataId) {
     SESegment *segmentFuel3 = [SESegment segmentWithColor:[UIColor greenColor] start:10.0 end:23.0];
     NSArray *fuelSegments = @[segmentFuel1, segmentFuel2, segmentFuel3];
     
-    SEGaugeViewController *fuelGaugeLeft = [SEGaugeViewController new];
+    SEGaugeCurveViewConroller *fuelGaugeLeft = [SEGaugeCurveViewConroller new];
     fuelGaugeLeft.controllerId = SEGaugeViewControllerIdFuelLeft;
     fuelGaugeLeft.minValue = 0.0;
     fuelGaugeLeft.maxValue = 23;
@@ -87,9 +89,10 @@ typedef NS_ENUM(UInt8, SEDataId) {
     fuelGaugeLeft.subTics = 1;
     fuelGaugeLeft.displayName = NSLocalizedString(@"FUEL LEFT", nil);
     fuelGaugeLeft.segments = fuelSegments;
+    fuelGaugeLeft.isLeft = YES;
     
     
-    SEGaugeViewController *fuelGaugeRight = [SEGaugeViewController new];
+    SEGaugeCurveViewConroller *fuelGaugeRight = [SEGaugeCurveViewConroller new];
     fuelGaugeRight.controllerId = SEGaugeViewControllerIdFuelRight;
     fuelGaugeRight.minValue = 0;
     fuelGaugeRight.maxValue = 23;
@@ -99,29 +102,33 @@ typedef NS_ENUM(UInt8, SEDataId) {
     fuelGaugeRight.subTics = 1;
     fuelGaugeRight.displayName = NSLocalizedString(@"FUEL RIGHT", nil);
     fuelGaugeRight.segments = fuelSegments;
+    fuelGaugeRight.isLeft = NO;
     
     self.gauges = @{@(SEGaugeViewControllerIdTach):gaugeTach,
-                    @(SEGaugeViewControllerIdFuelLeft):fuelGaugeLeft,
-                    @(SEGaugeViewControllerIdFuelRight):fuelGaugeRight
+                    @(SEGaugeViewControllerIdFuelLeft):fuelGaugeLeft
+                    //@(SEGaugeViewControllerIdFuelRight):fuelGaugeRight
                     };
     
     NSArray *gaugeOrder = @[@(SEGaugeViewControllerIdTach),
-                            @(SEGaugeViewControllerIdFuelLeft),
-                            @(SEGaugeViewControllerIdFuelRight)
+                            @(SEGaugeViewControllerIdFuelLeft)
+                            //@(SEGaugeViewControllerIdFuelRight)
                             ];
     
-    CGFloat diameter = 220;
+    static CGFloat diameter = 220.0;
     NSUInteger counter = 0;
+    CGPoint start = CGPointMake(10, self.view.center.y - .5*diameter);
     for (NSNumber *controllerId in gaugeOrder) {
         SEGaugeViewController *gvc = self.gauges[controllerId];
         [self addChildViewController:gvc];
-        gvc.viewFrame = CGRectMake(10*(counter+1) + counter*diameter,
-                                   self.view.center.y - .5*diameter,
-                                   diameter,
+        CGFloat gDiameter = gvc.controllerId == SEGaugeViewControllerIdTach ? diameter : .5*diameter;
+        gvc.viewFrame = CGRectMake(start.x,
+                                   start.y,
+                                   gDiameter,
                                    diameter);
         [self.view addSubview:gvc.view];
         [self.view bringSubviewToFront:gvc.view];
         [gvc didMoveToParentViewController:self];
+        start = CGPointMake(start.x + 10.0f + gDiameter, start.y);
         counter++;
     }
 }

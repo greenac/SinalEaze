@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class SEGaugeViewController;
+@class SEGaugeView, SENeedleView;
+
+#define kSEGaugeVCRadiusModifier    .97f
+#define kSEGaugeVCMaxInput          1023
 
 typedef NS_ENUM(NSUInteger, SEGaugeViewControllerId) {
     SEGaugeViewControllerIdTach = 0,
@@ -28,7 +32,14 @@ typedef NS_ENUM(NSUInteger, SEGaugeViewControllerId) {
 @property (nonatomic, assign) NSUInteger tics;
 @property (nonatomic, assign) NSUInteger subTics;
 @property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) UILabel *numberLabel;
+@property (nonatomic, assign) CGPoint needlePosition0;
+@property (nonatomic, strong) UIView *centerDotView;
+@property (nonatomic, strong) UILabel *nameLabel;
 
 - (void)updateLabelWithValue:(uint16_t)value;
 - (void)rotateNeedleToValue:(uint16_t)value;
+- (void)rotateNeedleToAngle:(CGFloat)angle;
+- (CGFloat)angleFromDegreesToRadians:(CGFloat)angle;
+
 @end

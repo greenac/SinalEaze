@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Andre Green. All rights reserved.
 //
 
-#import "SEGaugeCurveView.h"
+#import "SEGaugeView.h"
 
-@interface SEGaugeCircleView : SEGaugeCurveView
+@interface SEGaugeCircleView : SEGaugeView
 
 - (id)initWithFrame:(CGRect)frame
            segments:(NSArray *)segments

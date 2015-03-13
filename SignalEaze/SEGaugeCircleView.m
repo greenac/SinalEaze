@@ -97,7 +97,6 @@ numOfTicsInInterval:(NSUInteger)subTics
     [path addLineToPoint:[self pointForAngle:fromAngle radius:radius - height]];
     [path addLineToPoint:[self pointForAngle:toAngle radius:radius - height]];
     [path addLineToPoint:[self pointForAngle:toAngle radius:radius]];
-    
     [path closePath];
     [path fill];
 }

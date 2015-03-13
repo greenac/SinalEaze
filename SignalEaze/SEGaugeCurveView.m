@@ -12,17 +12,11 @@
 #import "SENeedleView.h"
 
 #define kSEGaugeTickHeight          5.0f
-#define kSEGaugeTickWidth           2.0f
+#define kSEGaugeTickWidth           5.0f/M_PI
 #define kSEGaugeTickWidthMultiplier 3.0f
 #define kSEGaugeSectionHeight       10.0f
 
 @interface SEGaugeCurveView()
-
-@property (nonatomic, assign) CGFloat diameter;
-@property (nonatomic, assign) CGPoint gaugeCenter;
-@property (nonatomic, assign) CGFloat minAngle;
-@property (nonatomic, assign) CGFloat maxAngle;
-
 
 @end
 
@@ -33,7 +27,8 @@
            minValue:(CGFloat)minValue
            maxValue:(CGFloat)maxValue
        numberOfTics:(NSUInteger)tics
-numOfTicsInInterval:(NSUInteger)subTics
+            subTics:(NSUInteger)subTics
+             radius:(CGFloat)radius
 {
     self = [super initWithFrame:frame
                        minValue:minValue
@@ -43,9 +38,9 @@ numOfTicsInInterval:(NSUInteger)subTics
                        segments:segments];
     
     if (self) {
-        _diameter = frame.size.width;
-    
-        self.backgroundColor = [UIColor whiteColor];
+        _radius = radius;
+        _innerRadius = .4*_radius;
+        self.backgroundColor = [UIColor clearColor];
     }
     
     return self;
@@ -56,20 +51,74 @@ numOfTicsInInterval:(NSUInteger)subTics
     [super layoutSubviews];
 }
 
-- (CGFloat)radius
+
+- (CGFloat)thickness
 {
-    return .5*self.diameter;
+    return self.radius - self.innerRadius;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawViewWithValues:(NSDictionary *)values
 {
-    [self drawSegments];
+    NSValue *a = values[@(SEGaugeCurveViewDrawingValuePoint1)];
+    NSValue *b = values[@(SEGaugeCurveViewDrawingValuePoint2)];
+    NSValue *c = values[@(SEGaugeCurveViewDrawingValuePoint3)];
+    NSValue *center = values[@(SEGaugeCurveViewDrawingValueCenter)];
+    NSNumber *angle1 = values[@(SEGaugeCurveViewDrawingValueAngle1)];
+    NSNumber *angle2 = values[@(SEGaugeCurveViewDrawingValueAngle2)];
     
-    CGFloat totalAngle = [self angleFromDegreesToRadians:self.maxAngle - self.minAngle];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:a.CGPointValue];
+    [path addLineToPoint:b.CGPointValue];
+    [path addArcWithCenter:center.CGPointValue
+                    radius:self.radius
+                startAngle:angle1.doubleValue
+                  endAngle:angle2.doubleValue
+                 clockwise:NO];
+    [path addLineToPoint:c.CGPointValue];
+    [path addArcWithCenter:center.CGPointValue
+                    radius:self.innerRadius
+                startAngle:angle2.doubleValue
+                  endAngle:angle1.doubleValue
+                 clockwise:YES];
+    [path addLineToPoint:a.CGPointValue];
+    [path closePath];
+    [path fill];
+}
+
+- (void)drawSegments
+{
+    for (SESegment *segment in self.segments) {
+        CGFloat startAngle = [self angleForValue:segment.startValue];
+        CGFloat endAngle = [self angleForValue:segment.endValue];
+        
+        [segment.segmentColor setFill];
+        
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        path.lineWidth = 1.0f;
+        [path moveToPoint:[self pointForAngle:startAngle radius:self.radius]];
+        [path addArcWithCenter:[self viewCenter]
+                        radius:self.radius
+                    startAngle:startAngle + M_PI_2
+                      endAngle:endAngle + M_PI_2
+                     clockwise:YES];
+        [path addLineToPoint:[self pointForAngle:endAngle radius:self.innerRadius]];
+        [path addArcWithCenter:[self viewCenter]
+                        radius:self.innerRadius
+                    startAngle:endAngle + M_PI_2
+                      endAngle:startAngle + M_PI_2
+                     clockwise:NO];
+        [path addLineToPoint:[self pointForAngle:startAngle radius:[self radius]]];
+        [path closePath];
+        [path fill];
+    }
+}
+
+- (void)drawTics
+{
     NSUInteger numberOfTics = self.tics*self.subTics;
-    CGFloat angle = [self angleFromDegreesToRadians:self.minAngle];
-    CGFloat dThetaTick = kSEGaugeTickWidth/[self radius];
-    CGFloat dThetaGap = (totalAngle - numberOfTics*dThetaTick)/numberOfTics;
+    CGFloat angle = 0.0;
+    CGFloat dThetaTick = kSEGaugeTickWidth/self.radius;
+    CGFloat dThetaGap = (M_PI - numberOfTics*dThetaTick)/numberOfTics;
     
     [[UIColor grayColor] setFill];
     for (NSUInteger i=0; i <= numberOfTics; i++) {
@@ -83,78 +132,31 @@ numOfTicsInInterval:(NSUInteger)subTics
 
 - (void)drawTickFromAngle:(CGFloat)fromAngle toAngle:(CGFloat)toAngle isLarge:(BOOL)isLarge
 {
-    CGFloat radius = [self radius];
     CGFloat height = isLarge ? kSEGaugeTickWidthMultiplier*kSEGaugeTickHeight : kSEGaugeTickHeight;
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:[self pointForAngle:fromAngle radius:radius]];
-    [path addLineToPoint:[self pointForAngle:fromAngle radius:radius - height]];
-    [path addLineToPoint:[self pointForAngle:toAngle radius:radius - height]];
-    [path addLineToPoint:[self pointForAngle:toAngle radius:radius]];
     
+    [path moveToPoint:[self pointForAngle:fromAngle radius:self.radius]];
+    [path addLineToPoint:[self pointForAngle:fromAngle radius:self.radius - height]];
+    [path addLineToPoint:[self pointForAngle:toAngle radius:self.radius - height]];
+    [path addLineToPoint:[self pointForAngle:toAngle radius:self.radius]];
     [path closePath];
     [path fill];
 }
 
-- (CGFloat)range
-{
-    CGFloat degreeRange = (self.maxAngle - self.minAngle);
-    return [self angleFromDegreesToRadians:degreeRange];
-}
-
 - (CGFloat)angleForValue:(CGFloat)value
 {
-    return value*[self range]/(self.maxValue - self.minValue) + [self angleFromDegreesToRadians:self.minAngle];
+    return value*M_PI/(self.maxValue - self.minValue);
 }
 
 - (CGFloat)valueForAngle:(CGFloat)angle
 {
-    return (self.maxValue - self.minValue)*angle/[self range] - [self angleFromDegreesToRadians:self.minAngle];
-}
-
-- (CGFloat)angleFromDegreesToRadians:(CGFloat)angle
-{
-    return angle*M_PI/180.0;
-}
-
-- (CGPoint)circleCenter
-{
-    return CGPointMake(self.frame.size.width/2.0f, self.frame.size.height/2.0f);
+    return (self.maxValue - self.minValue)*angle/M_PI;
 }
 
 - (CGPoint)pointForAngle:(CGFloat)angle radius:(CGFloat)radius
 {
-    CGFloat viewRadius = [self radius];
-    return CGPointMake(viewRadius - radius*sin(angle), viewRadius + radius*cos(angle));
-}
-
-- (void)drawSegments
-{
-    for (SESegment *segment in self.segments) {
-        
-        CGFloat startAngle = [self angleForValue:segment.startValue];
-        CGFloat endAngle = [self angleForValue:segment.endValue];
-        
-        [segment.segmentColor setFill];
-        
-        UIBezierPath *path = [UIBezierPath bezierPath];
-        [path moveToPoint:[self pointForAngle:startAngle radius:[self radius]]];
-        [path addArcWithCenter:[self circleCenter]
-                        radius:[self radius]
-                    startAngle:startAngle + M_PI_2
-                      endAngle:endAngle + M_PI_2
-                     clockwise:YES];
-        [path addLineToPoint:[self pointForAngle:endAngle radius:[self radius] - kSEGaugeSectionHeight]];
-        [path addArcWithCenter:[self circleCenter]
-                        radius:[self radius] - kSEGaugeSectionHeight
-                    startAngle:endAngle + M_PI_2
-                      endAngle:startAngle + M_PI_2
-                     clockwise:NO];
-        [path addLineToPoint:[self pointForAngle:startAngle radius:[self radius]]];
-        
-        [path closePath];
-        [path fill];
-    }
+    return CGPointMake(self.radius - radius*sin(angle), self.radius + radius*cos(angle));
 }
 
 @end
