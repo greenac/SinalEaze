@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SEGaugeView.h"
 
+#define kSEGaugeTickHeight          5.0f
+#define kSEGaugeTickWidth           5.0f/M_PI
+#define kSEGaugeTickWidthMultiplier 3.0f
+#define kSEGaugeSectionHeight       10.0f
+
 typedef NS_ENUM(NSUInteger, SEGaugeCurveViewDrawingValue) {
     SEGaugeCurveViewDrawingValuePoint1,
     SEGaugeCurveViewDrawingValuePoint2,

@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, SEGaugeViewControllerId) {
     SEGaugeViewControllerIdTach = 0,
     SEGaugeViewControllerIdFuelLeft,
     SEGaugeViewControllerIdFuelRight,
+    SEGaugeViewControllerIdAmps,
     SEGaugeViewControllerIdNone
 };
 
@@ -28,6 +29,7 @@ typedef NS_ENUM(NSUInteger, SEGaugeViewControllerId) {
 @property (nonatomic, assign) CGFloat minValue;
 @property (nonatomic, assign) CGFloat minAngle;
 @property (nonatomic, assign) CGFloat maxAngle;
+
 @property (nonatomic, strong) NSArray *segments;
 @property (nonatomic, assign) NSUInteger tics;
 @property (nonatomic, assign) NSUInteger subTics;
@@ -36,10 +38,11 @@ typedef NS_ENUM(NSUInteger, SEGaugeViewControllerId) {
 @property (nonatomic, assign) CGPoint needlePosition0;
 @property (nonatomic, strong) UIView *centerDotView;
 @property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, assign) uint16_t currentValue;
 
-- (void)updateLabelWithValue:(uint16_t)value;
-- (void)rotateNeedleToValue:(uint16_t)value;
+- (void)updateLabelWithCurrentValue;
+- (void)rotateNeedleToCurrentValue;
 - (void)rotateNeedleToAngle:(CGFloat)angle;
+- (void)moveNeedleToCurrentValue;
 - (CGFloat)angleFromDegreesToRadians:(CGFloat)angle;
-
 @end

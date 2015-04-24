@@ -23,4 +23,5 @@
             subtics:(NSUInteger)subtics
            segments:(NSArray *)segments;
 
+- (NSUInteger)numberOfTics;
 @end

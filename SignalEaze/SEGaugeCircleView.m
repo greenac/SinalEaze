@@ -136,7 +136,6 @@ numOfTicsInInterval:(NSUInteger)subTics
 - (void)drawSegments
 {
     for (SESegment *segment in self.segments) {
-        
         CGFloat startAngle = [self angleForValue:segment.startValue];
         CGFloat endAngle = [self angleForValue:segment.endValue];
         

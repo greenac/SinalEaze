@@ -11,11 +11,6 @@
 #import "SESegment.h"
 #import "SENeedleView.h"
 
-#define kSEGaugeTickHeight          5.0f
-#define kSEGaugeTickWidth           5.0f/M_PI
-#define kSEGaugeTickWidthMultiplier 3.0f
-#define kSEGaugeSectionHeight       10.0f
-
 @interface SEGaugeCurveView()
 
 @end
@@ -66,6 +61,8 @@
     NSNumber *angle1 = values[@(SEGaugeCurveViewDrawingValueAngle1)];
     NSNumber *angle2 = values[@(SEGaugeCurveViewDrawingValueAngle2)];
     
+    [[UIColor grayColor] setFill];
+    
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:a.CGPointValue];
     [path addLineToPoint:b.CGPointValue];
@@ -96,18 +93,18 @@
         UIBezierPath *path = [UIBezierPath bezierPath];
         path.lineWidth = 1.0f;
         [path moveToPoint:[self pointForAngle:startAngle radius:self.radius]];
-        [path addArcWithCenter:[self viewCenter]
+        [path addArcWithCenter:self.viewCenter
                         radius:self.radius
                     startAngle:startAngle + M_PI_2
                       endAngle:endAngle + M_PI_2
                      clockwise:YES];
         [path addLineToPoint:[self pointForAngle:endAngle radius:self.innerRadius]];
-        [path addArcWithCenter:[self viewCenter]
+        [path addArcWithCenter:self.viewCenter
                         radius:self.innerRadius
                     startAngle:endAngle + M_PI_2
                       endAngle:startAngle + M_PI_2
                      clockwise:NO];
-        [path addLineToPoint:[self pointForAngle:startAngle radius:[self radius]]];
+        [path addLineToPoint:[self pointForAngle:startAngle radius:self.radius]];
         [path closePath];
         [path fill];
     }
@@ -115,19 +112,7 @@
 
 - (void)drawTics
 {
-    NSUInteger numberOfTics = self.tics*self.subTics;
-    CGFloat angle = 0.0;
-    CGFloat dThetaTick = kSEGaugeTickWidth/self.radius;
-    CGFloat dThetaGap = (M_PI - numberOfTics*dThetaTick)/numberOfTics;
-    
     [[UIColor grayColor] setFill];
-    for (NSUInteger i=0; i <= numberOfTics; i++) {
-        [self drawTickFromAngle:angle
-                        toAngle:angle + dThetaTick
-                        isLarge:i % self.subTics == 0];
-        
-        angle += dThetaTick + dThetaGap;
-    }
 }
 
 - (void)drawTickFromAngle:(CGFloat)fromAngle toAngle:(CGFloat)toAngle isLarge:(BOOL)isLarge

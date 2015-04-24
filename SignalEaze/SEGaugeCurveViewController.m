@@ -1,34 +1,33 @@
 //
-//  SEGaugeCurveViewConroller.m
+//  SEGaugeCurveViewController.m
 //  SignalEaze
 //
 //  Created by Andre Green on 3/2/15.
 //  Copyright (c) 2015 Andre Green. All rights reserved.
 //
 
-#import "SEGaugeCurveViewConroller.h"
+#import "SEGaugeCurveViewController.h"
 #import "SEGaugeCurveView.h"
 #import "SEGaugeLeftCurveView.h"
 #import "SEGaugeRightCurveView.h"
 
 #define kSEGaugeCurveVCInnerRadiusModifier  .4
 #define kSEGaugeCurveVCMaxPoint             CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX)
-@interface SEGaugeCurveViewConroller ()
+
+@interface SEGaugeCurveViewController ()
 
 @property (nonatomic, strong) SEGaugeCurveView *gaugeView;
 @property (nonatomic, strong) UIView *needleView;
 @property (nonatomic, assign) CGPoint currentAnchor;
-@property (nonatomic, assign) uint16_t currentValue;
+
 
 @end
 
-@implementation SEGaugeCurveViewConroller
+@implementation SEGaugeCurveViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currentValue = 0;
-
     self.view.clipsToBounds = YES;
     
     self.view = self.gaugeView;
@@ -38,24 +37,47 @@
     [self.view addSubview:self.needleView];
     
     self.currentAnchor = kSEGaugeCurveVCMaxPoint;
+    
+    CGSize nameSize = [self.displayName sizeWithAttributes:@{NSFontAttributeName:self.nameLabel.font}];
+    
+    self.nameLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:.9f];
+    self.nameLabel.font = [self.nameLabel.font fontWithSize:12.0f];
+    self.nameLabel.textAlignment = self.isLeft ? NSTextAlignmentRight : NSTextAlignmentLeft;
+    self.nameLabel.numberOfLines = 2;
+    if (![self.view.subviews containsObject:self.nameLabel]) {
+        [self.view addSubview:self.nameLabel];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    self.needleView.frame = CGRectMake(self.view.bounds.size.width - self.needleView.bounds.size.width,
-                                       0.0f,
+    
+    CGFloat needleX0 = self.isLeft ? self.view.bounds.size.width - self.needleView.bounds.size.width:0.0f;
+    self.needleView.frame = CGRectMake(needleX0,
+                                       .5*self.view.bounds.size.height - self.needleView.bounds.size.height,
                                        self.needleView.bounds.size.width,
                                        self.needleView.bounds.size.height);
     
+    CGFloat nameLabelX0 = self.isLeft ? self.view.bounds.size.width - self.nameLabel.bounds.size.width : 0.0f;
+    CGFloat nameLabelY0 = self.view.bounds.size.height - self.radius - 2*self.innerRadius;
+    
+    self.nameLabel.frame = CGRectMake(nameLabelX0,
+                                      nameLabelY0,
+                                      self.nameLabel.frame.size.width,
+                                      self.nameLabel.frame.size.height);
+    
     self.currentValue = 0.0f;
+    
     NSTimer *needleTimer = [NSTimer scheduledTimerWithTimeInterval:.1
                                                             target:self
                                                           selector:@selector(testNeedle)
                                                           userInfo:nil
                                                            repeats:YES];
     [needleTimer fire];
+    
+    //self.nameLabel.frame = CGRectMake(0, 0, self.nameLabel.bounds.size.width, self.nameLabel.bounds.size.height);
 }
 
 - (SEGaugeCurveView *)gaugeView
@@ -63,10 +85,8 @@
     if (!_gaugeView) {
 
         CGFloat width = self.view.frame.size.width;
-        CGRect frame = self.view.frame;
-        
         if (self.isLeft) {
-            _gaugeView = [[SEGaugeLeftCurveView alloc] initWithFrame:frame
+            _gaugeView = [[SEGaugeLeftCurveView alloc] initWithFrame:self.view.frame
                                                             segments:self.segments
                                                             minValue:self.minValue
                                                             maxValue:self.maxValue
@@ -74,7 +94,7 @@
                                                              subTics:self.subTics
                                                               radius:width];
         } else {
-            _gaugeView = [[SEGaugeRightCurveView alloc] initWithFrame:frame
+            _gaugeView = [[SEGaugeRightCurveView alloc] initWithFrame:self.view.frame
                                                              segments:self.segments
                                                              minValue:self.minValue
                                                              maxValue:self.maxValue
@@ -93,13 +113,13 @@
         _needleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
                                                                0.0f,
                                                                3.0f,
-                                                               self.radius)];
+                                                               .95*self.radius)];
         _needleView.backgroundColor = [UIColor clearColor];
         
         UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
                                                                      0.0f,
                                                                      _needleView.bounds.size.width,
-                                                                     self.radius - self.innerRadius)];
+                                                                     _needleView.bounds.size.height - self.innerRadius)];
         outerView.backgroundColor = [UIColor whiteColor];
         
         UIView *innerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
@@ -136,11 +156,11 @@
     self.needleView.transform = CGAffineTransformMakeRotation(angle);
 }
 
-- (void)rotateNeedleToValue:(uint16_t)value
+- (void)rotateNeedleToCurrentValue
 {
-    [super rotateNeedleToValue:value];
+    [super rotateNeedleToCurrentValue];
     
-    CGFloat ratio = (CGFloat)value/(CGFloat)kSEGaugeVCMaxInput;
+    CGFloat ratio = (CGFloat)self.currentValue/(CGFloat)kSEGaugeVCMaxInput;
     //CGFloat theta = ratio*[self angleFromDegreesToRadians:self.maxAngle - self.minAngle] - M_PI +[self angleFromDegreesToRadians:self.minAngle];
     CGFloat theta = (1.0 - ratio)*M_PI;
     
@@ -155,8 +175,8 @@
 
 - (void)testNeedle
 {
-    self.currentValue++;
-    [self rotateNeedleToValue:self.currentValue];
+    self.currentValue += 5;
+    [self rotateNeedleToCurrentValue];
 }
 
 @end

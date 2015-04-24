@@ -7,6 +7,7 @@
 //
 
 #import "SEGaugeRightCurveView.h"
+#import "SESegment.h"
 
 @implementation SEGaugeRightCurveView
 
@@ -35,6 +36,73 @@
     [self drawSegments];
     [self drawTics];
 }
+
+- (void)drawSegments
+{
+    for (SESegment *segment in self.segments) {
+        static CGFloat angleOffset = 3*M_PI_2;
+        CGFloat startAngle = [self angleForValue:segment.startValue];
+        CGFloat endAngle = [self angleForValue:segment.endValue];
+        CGFloat arcStartAngle = startAngle - angleOffset;
+        CGFloat arcEndAngle = endAngle - angleOffset;
+    
+        [segment.segmentColor setFill];
+        
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        path.lineWidth = 1.0f;
+        [path moveToPoint:[self pointForAngle:startAngle radius:self.radius]];
+        [path addArcWithCenter:self.viewCenter
+                        radius:self.radius
+                    startAngle:arcStartAngle
+                      endAngle:arcEndAngle
+                     clockwise:NO];
+        [path addLineToPoint:[self pointForAngle:endAngle radius:self.innerRadius]];
+        [path addArcWithCenter:self.viewCenter
+                        radius:self.innerRadius
+                    startAngle:arcEndAngle
+                      endAngle:arcStartAngle
+                     clockwise:YES];
+        [path addLineToPoint:[self pointForAngle:startAngle radius:self.radius]];
+        [path closePath];
+        [path fill];
+    }
+}
+
+- (void)drawTics
+{
+    [super drawTics];
+    
+    NSUInteger numberOfTics = self.tics*self.subTics;
+    CGFloat dThetaTick = kSEGaugeTickWidth/self.radius;
+    CGFloat dThetaGap = (M_PI - numberOfTics*dThetaTick)/numberOfTics;
+    CGFloat angle = 2*M_PI - dThetaGap;
+
+    for (NSUInteger i=0; i <= numberOfTics; i++) {
+        [self drawTickFromAngle:angle
+                        toAngle:angle - dThetaTick
+                        isLarge:i % self.subTics == 0];
+        
+        angle += -dThetaTick - dThetaGap;
+    }
+}
+
+- (CGFloat)angleForValue:(CGFloat)value
+{
+    CGFloat supersAngle = [super angleForValue:value];
+    return 2*M_PI - supersAngle;
+}
+
+- (CGPoint)viewCenter
+{
+    return CGPointMake(0.0f, .5f*self.bounds.size.height);
+}
+
+- (CGPoint)pointForAngle:(CGFloat)angle radius:(CGFloat)radius
+{
+    CGPoint point = CGPointMake(-radius*sin(angle), self.radius + radius*cos(angle));
+    return point;
+}
+
 
 
 

@@ -38,14 +38,27 @@
     [self drawTics];
 }
 
-- (void)drawViewWithValues:(NSDictionary *)values
-{
-    [super drawViewWithValues:values];
-}
-
 - (CGPoint)viewCenter
 {
     return CGPointMake(self.bounds.size.width, .5f*self.bounds.size.height);
+}
+
+- (void)drawTics
+{
+    [super drawTics];
+    
+    NSUInteger numberOfTics = self.tics*self.subTics;
+    CGFloat angle = 0.0;
+    CGFloat dThetaTick = kSEGaugeTickWidth/self.radius;
+    CGFloat dThetaGap = (M_PI - numberOfTics*dThetaTick)/numberOfTics;
+    
+    for (NSUInteger i=0; i <= numberOfTics; i++) {
+        [self drawTickFromAngle:angle
+                        toAngle:angle + dThetaTick
+                        isLarge:i % self.subTics == 0];
+        
+        angle += dThetaTick + dThetaGap;
+    }
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  SEGaugeCurveViewConroller.h
+//  SEGaugeCurveViewController.h
 //  SignalEaze
 //
 //  Created by Andre Green on 3/2/15.
@@ -8,7 +8,7 @@
 
 #import "SEGaugeViewController.h"
 
-@interface SEGaugeCurveViewConroller : SEGaugeViewController
+@interface SEGaugeCurveViewController : SEGaugeViewController
 
 @property (nonatomic, assign) BOOL isLeft;
 

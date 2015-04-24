@@ -12,7 +12,8 @@
 #import "SEGaugeCurveView.h"
 #import "SEGaugeCircleView.h"
 #import "SEGaugeCircleViewController.h"
-#import "SEGaugeCurveViewConroller.h"
+#import "SEGaugeCurveViewController.h"
+#import "SEGaugeStraightViewController.h"
 
 #define kPeriphialName  @"SigEazeBLE"
 #define kPeriphialUIDD  @"713D0000-503E-4C75-BA94-3148F18D941E"
@@ -76,10 +77,10 @@ typedef NS_ENUM(UInt8, SEDataId) {
     
     SESegment *segmentFuel1 = [SESegment segmentWithColor:[UIColor redColor] start:0.0 end:5.0];
     SESegment *segmentFuel2 = [SESegment segmentWithColor:[UIColor yellowColor] start:5.0 end:10];
-    SESegment *segmentFuel3 = [SESegment segmentWithColor:[UIColor greenColor] start:10.0 end:23.0];
-    NSArray *fuelSegments = @[segmentFuel1, segmentFuel2, segmentFuel3];
-    
-    SEGaugeCurveViewConroller *fuelGaugeLeft = [SEGaugeCurveViewConroller new];
+    SESegment *segmentFuel3 = [SESegment segmentWithColor:[UIColor greenColor] start:5.0 end:23.0];
+    NSArray *fuelSegments = @[segmentFuel1, segmentFuel3];
+
+    SEGaugeCurveViewController *fuelGaugeLeft = [SEGaugeCurveViewController new];
     fuelGaugeLeft.controllerId = SEGaugeViewControllerIdFuelLeft;
     fuelGaugeLeft.minValue = 0.0;
     fuelGaugeLeft.maxValue = 23;
@@ -92,7 +93,7 @@ typedef NS_ENUM(UInt8, SEDataId) {
     fuelGaugeLeft.isLeft = YES;
     
     
-    SEGaugeCurveViewConroller *fuelGaugeRight = [SEGaugeCurveViewConroller new];
+    SEGaugeCurveViewController *fuelGaugeRight = [SEGaugeCurveViewController new];
     fuelGaugeRight.controllerId = SEGaugeViewControllerIdFuelRight;
     fuelGaugeRight.minValue = 0;
     fuelGaugeRight.maxValue = 23;
@@ -104,14 +105,30 @@ typedef NS_ENUM(UInt8, SEDataId) {
     fuelGaugeRight.segments = fuelSegments;
     fuelGaugeRight.isLeft = NO;
     
+    SESegment *ampSegment1 = [SESegment segmentWithColor:[UIColor redColor] start:0.0 end:9.0];
+    SESegment *ampSegment2 = [SESegment segmentWithColor:[UIColor blueColor] start:9.0 end:12.0];
+    NSArray *ampSegments = @[ampSegment1, ampSegment2];
+    
+    SEGaugeStraightViewController *ampMeter = [SEGaugeStraightViewController new];
+    ampMeter.controllerId = SEGaugeViewControllerIdAmps;
+    ampMeter.isLeft = YES;
+    ampMeter.minValue = 0;
+    ampMeter.maxValue = 12;
+    ampMeter.tics = 12;
+    ampMeter.subTics = 2;
+    ampMeter.displayName = NSLocalizedString(@"Amps", nil);
+    ampMeter.segments = ampSegments;
+    
     self.gauges = @{@(SEGaugeViewControllerIdTach):gaugeTach,
-                    @(SEGaugeViewControllerIdFuelLeft):fuelGaugeLeft
-                    //@(SEGaugeViewControllerIdFuelRight):fuelGaugeRight
+                    @(SEGaugeViewControllerIdFuelLeft):fuelGaugeLeft,
+                    @(SEGaugeViewControllerIdFuelRight):fuelGaugeRight,
+                    @(SEGaugeViewControllerIdAmps):ampMeter
                     };
     
     NSArray *gaugeOrder = @[@(SEGaugeViewControllerIdTach),
-                            @(SEGaugeViewControllerIdFuelLeft)
-                            //@(SEGaugeViewControllerIdFuelRight)
+                            @(SEGaugeViewControllerIdFuelLeft),
+                            @(SEGaugeViewControllerIdFuelRight),
+                            @(SEGaugeViewControllerIdAmps)
                             ];
     
     static CGFloat diameter = 220.0;
@@ -273,13 +290,15 @@ typedef NS_ENUM(UInt8, SEDataId) {
 - (void)updateGaugeLabelForId:(SEGaugeViewControllerId)controllerId withValue:(uint16_t)value
 {
     SEGaugeViewController *gvc = self.gauges[@(controllerId)];
-    [gvc updateLabelWithValue:value];
+    gvc.currentValue = value;
+    [gvc updateLabelWithCurrentValue];
 }
 
 - (void)updateNeedlePositionForId:(SEGaugeViewControllerId)controllerId withValue:(uint16_t)value
 {
     SEGaugeViewController *gvc = self.gauges[@(controllerId)];
-    [gvc rotateNeedleToValue:value];
+    gvc.currentValue = value;
+    [gvc rotateNeedleToCurrentValue];
 }
 
 - (SEGaugeViewControllerId)controllerIdForIndex:(int)index

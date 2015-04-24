@@ -29,6 +29,11 @@
     return self;
 }
 
+- (NSUInteger)numberOfTics
+{
+    return self.tics*self.subTics;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -20,14 +20,10 @@
 
 @implementation SEGaugeViewController
 
-- (void)loadView
-{
-    [super loadView];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.currentValue = 0;
     self.view.frame = self.viewFrame;
     
     self.needlePosition0 = CGPointZero;
@@ -69,8 +65,9 @@
     return angle*M_PI/180.0;
 }
 
+
 #pragma mark - Virtual methods
-- (void)rotateNeedleToValue:(uint16_t)value
+- (void)rotateNeedleToCurrentValue
 {
     // must be overridden in child class
 }
@@ -79,4 +76,10 @@
 {
     // must override in child class
 }
+
+- (void)moveNeedleToCurrentValue
+{
+    // override in straight guage child class
+}
+
 @end
