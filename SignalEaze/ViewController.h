@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@import CoreBluetooth;
-@import QuartzCore;
 
-@interface ViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
+
+@interface ViewController : UIViewController
 
 @property (nonatomic, assign)CGFloat angle;
 

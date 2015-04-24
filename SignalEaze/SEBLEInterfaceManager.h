@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SEBLEInterfaceMangager : NSObject
+@import CoreBluetooth;
+@import QuartzCore;
+
+
+@interface SEBLEInterfaceMangager : NSObject<CBCentralManagerDelegate, CBPeripheralDelegate>
 
 + (id)manager;
+- (void)runTests;
 
 @end

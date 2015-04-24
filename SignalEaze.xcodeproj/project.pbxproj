@@ -95,6 +95,7 @@
 		DC7EAF7A1AE6F4F700F55965 /* SEGaugeStraightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeStraightView.m; sourceTree = "<group>"; };
 		DC7EAF7C1AE7112400F55965 /* SEGaugeStraightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeStraightViewController.h; sourceTree = "<group>"; };
 		DC7EAF7D1AE7112400F55965 /* SEGaugeStraightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeStraightViewController.m; sourceTree = "<group>"; };
+		DCB0BA271AEAEABD00A4606E /* SENotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SENotifications.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +137,7 @@
 		658B8C5D1A8D7CAC002E2179 /* SignalEaze */ = {
 			isa = PBXGroup;
 			children = (
+				DCB0BA271AEAEABD00A4606E /* SENotifications.h */,
 				DC0BCBD71AB33BE10049AF43 /* SEGaugeLeftCurveView.h */,
 				DC0BCBD81AB33BE10049AF43 /* SEGaugeLeftCurveView.m */,
 				DC0BCBDA1AB345280049AF43 /* SEGaugeRightCurveView.h */,
