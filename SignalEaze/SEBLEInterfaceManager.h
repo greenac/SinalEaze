@@ -11,8 +11,17 @@
 @import CoreBluetooth;
 @import QuartzCore;
 
+@class SEBLEInterfaceMangager;
+
+@protocol SEBLEInterfaceManagerDelegate <NSObject>
+
+- (void)bleInterfaceManager:(SEBLEInterfaceMangager *)interfaceManager didUpdateVales:(NSArray *)values;
+
+@end
 
 @interface SEBLEInterfaceMangager : NSObject<CBCentralManagerDelegate, CBPeripheralDelegate>
+
+@property (nonatomic, weak) id<SEBLEInterfaceManagerDelegate>delegate;
 
 + (id)manager;
 - (void)runTests;

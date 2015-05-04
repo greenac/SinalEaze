@@ -10,6 +10,8 @@
 #import "SENotifications.h"
 
 #define kPeriphialName  @"SigEazeBLE"
+#define kPeriphialDataLocalNameKey @"kCBAdvDataLocalName"
+#define kPeriphialDataLocalName @"SigEazeBLE"
 #define kPeriphialUIDD  @"713D0000-503E-4C75-BA94-3148F18D941E"
 #define kServiceUIDD    @"713D0002-503E-4C75-BA94-3148F18D941E"
 
@@ -29,6 +31,16 @@ typedef NS_ENUM(UInt8, SEDataId) {
 
 
 @implementation SEBLEInterfaceMangager
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    }
+    
+    return self;
+}
 
 + (id)manager
 {
@@ -55,10 +67,11 @@ typedef NS_ENUM(UInt8, SEDataId) {
 {
     
 }
+
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     NSLog(@"found periphial named: %@ with advertistment data: %@", peripheral.name, advertisementData.description);
-    if (peripheral.name && [peripheral.name isEqualToString:kPeriphialName] && !self.arduinoPeriphial) {
+    if (advertisementData && [advertisementData[kPeriphialDataLocalNameKey] isEqualToString:kPeriphialDataLocalName] && !self.arduinoPeriphial) {
         self.arduinoPeriphial = peripheral;
         self.arduinoPeriphial.delegate = self;
         [self.centralManager connectPeripheral:self.arduinoPeriphial options:nil];
@@ -146,9 +159,8 @@ typedef NS_ENUM(UInt8, SEDataId) {
     //        }
     //    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSENotificationUpdateGuages
-                                                        object:self
-                                                      userInfo:@{kSENotificationUpdateGaugeValues:numbers}];
+    
+    [self valuesUpdated:numbers];
     
     NSLog(@"there are %ld sensor values. they are: %@", (long)numbers.count, numbers);
 }
@@ -181,5 +193,10 @@ typedef NS_ENUM(UInt8, SEDataId) {
     return CBUUIDString;
 }
 
-
+- (void)valuesUpdated:(NSArray *)values
+{
+    if ([self.delegate respondsToSelector:@selector(bleInterfaceManager:didUpdateVales:)]) {
+        [self.delegate bleInterfaceManager:self didUpdateVales:values];
+    }
+}
 @end

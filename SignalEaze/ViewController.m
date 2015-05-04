@@ -15,12 +15,14 @@
 #import "SEGaugeCurveViewController.h"
 #import "SEGaugeStraightViewController.h"
 #import "SENotifications.h"
+#import "SEBLEInterfaceManager.h"
 
-@interface ViewController()
+@interface ViewController() <SEBLEInterfaceManagerDelegate>
 
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UIView *tick;
 @property (nonatomic, strong) NSDictionary *gauges;
+@property (nonatomic, strong) SEBLEInterfaceMangager *bleInterfaceManager;
 
 @end
 
@@ -28,6 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.bleInterfaceManager = [SEBLEInterfaceMangager manager];
+    self.bleInterfaceManager.delegate = self;
     
     self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 500, 100)];
     self.label.textAlignment = NSTextAlignmentCenter;
@@ -40,6 +45,11 @@
                                              selector:@selector(updateGuageValuesWithValues:)
                                                  name:kSENotificationUpdateGuages
                                                object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -190,4 +200,11 @@
         }
     }
 }
+
+#pragma mark - SEBLEInterfaceManager delegate methods
+- (void)bleInterfaceManager:(SEBLEInterfaceMangager *)interfaceManager didUpdateVales:(NSArray *)values
+{
+    NSLog(@"values in delegate method: %@", values);
+}
+
 @end
