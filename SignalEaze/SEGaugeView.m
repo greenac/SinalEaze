@@ -16,6 +16,7 @@
                tics:(NSUInteger)tics
             subtics:(NSUInteger)subtics
            segments:(NSArray *)segments
+             isLeft:(BOOL)isLeft
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -24,6 +25,7 @@
         _tics = tics;
         _subTics = subtics;
         _segments = segments;
+        _isLeft = isLeft;
     }
     
     return self;
@@ -33,13 +35,5 @@
 {
     return self.tics*self.subTics;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

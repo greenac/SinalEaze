@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SENeedleView.h"
 
-@interface SECurveNeedleView : UIView
+@interface SECurveNeedleView : SENeedleView
+
+- (id)initWithFrame:(CGRect)frame innerRadius:(CGFloat)innerRadius;
 
 @end

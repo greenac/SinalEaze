@@ -24,7 +24,6 @@
 		658B8C7E1A8D7CAC002E2179 /* SignalEazeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C7D1A8D7CAC002E2179 /* SignalEazeTests.m */; };
 		658B8C891A8D7D8B002E2179 /* SEGaugeCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B8C881A8D7D8B002E2179 /* SEGaugeCurveView.m */; };
 		659D53DE1AAA02F400A6B1C8 /* SECurveNeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 659D53DD1AAA02F400A6B1C8 /* SECurveNeedleView.m */; };
-		65B3EE9A1AA26F4700C9E159 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B3EE991AA26F4700C9E159 /* MainViewController.m */; };
 		65B3EE9E1AA2702B00C9E159 /* GaugeValues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B3EE9D1AA2702B00C9E159 /* GaugeValues.plist */; };
 		65D3970F1A8FA3A000F9C708 /* TickMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D3970E1A8FA3A000F9C708 /* TickMarkView.m */; };
 		DC0BCBD91AB33BE10049AF43 /* SEGaugeLeftCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0BCBD81AB33BE10049AF43 /* SEGaugeLeftCurveView.m */; };
@@ -33,6 +32,7 @@
 		DC7EAF781AE6EE3800F55965 /* SEStraightNeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7EAF771AE6EE3800F55965 /* SEStraightNeedleView.m */; };
 		DC7EAF7B1AE6F4F700F55965 /* SEGaugeStraightView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7EAF7A1AE6F4F700F55965 /* SEGaugeStraightView.m */; };
 		DC7EAF7E1AE7112400F55965 /* SEGaugeStraightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7EAF7D1AE7112400F55965 /* SEGaugeStraightViewController.m */; };
+		DC7F23E21AF80973006B77D4 /* SERoundNeedleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7F23E11AF80973006B77D4 /* SERoundNeedleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,8 +78,6 @@
 		658B8C881A8D7D8B002E2179 /* SEGaugeCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeCurveView.m; sourceTree = "<group>"; };
 		659D53DC1AAA02F400A6B1C8 /* SECurveNeedleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SECurveNeedleView.h; sourceTree = "<group>"; };
 		659D53DD1AAA02F400A6B1C8 /* SECurveNeedleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SECurveNeedleView.m; sourceTree = "<group>"; };
-		65B3EE981AA26F4700C9E159 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		65B3EE991AA26F4700C9E159 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		65B3EE9D1AA2702B00C9E159 /* GaugeValues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GaugeValues.plist; sourceTree = "<group>"; };
 		65D3970D1A8FA3A000F9C708 /* TickMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TickMarkView.h; sourceTree = "<group>"; };
 		65D3970E1A8FA3A000F9C708 /* TickMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TickMarkView.m; sourceTree = "<group>"; };
@@ -95,6 +93,8 @@
 		DC7EAF7A1AE6F4F700F55965 /* SEGaugeStraightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeStraightView.m; sourceTree = "<group>"; };
 		DC7EAF7C1AE7112400F55965 /* SEGaugeStraightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEGaugeStraightViewController.h; sourceTree = "<group>"; };
 		DC7EAF7D1AE7112400F55965 /* SEGaugeStraightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEGaugeStraightViewController.m; sourceTree = "<group>"; };
+		DC7F23E01AF80973006B77D4 /* SERoundNeedleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SERoundNeedleView.h; sourceTree = "<group>"; };
+		DC7F23E11AF80973006B77D4 /* SERoundNeedleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SERoundNeedleView.m; sourceTree = "<group>"; };
 		DCB0BA271AEAEABD00A4606E /* SENotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SENotifications.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,9 +144,9 @@
 				DC0BCBDB1AB345280049AF43 /* SEGaugeRightCurveView.m */,
 				659D53DC1AAA02F400A6B1C8 /* SECurveNeedleView.h */,
 				659D53DD1AAA02F400A6B1C8 /* SECurveNeedleView.m */,
+				DC7F23E01AF80973006B77D4 /* SERoundNeedleView.h */,
+				DC7F23E11AF80973006B77D4 /* SERoundNeedleView.m */,
 				65B3EE9D1AA2702B00C9E159 /* GaugeValues.plist */,
-				65B3EE981AA26F4700C9E159 /* MainViewController.h */,
-				65B3EE991AA26F4700C9E159 /* MainViewController.m */,
 				654E90291A9E2D7900547288 /* SEGaugeViewController.h */,
 				654E902A1A9E2D7900547288 /* SEGaugeViewController.m */,
 				DC7EAF7C1AE7112400F55965 /* SEGaugeStraightViewController.h */,
@@ -323,7 +323,6 @@
 				DC7EAF7B1AE6F4F700F55965 /* SEGaugeStraightView.m in Sources */,
 				DC7EAF781AE6EE3800F55965 /* SEStraightNeedleView.m in Sources */,
 				DC0BCBDC1AB345280049AF43 /* SEGaugeRightCurveView.m in Sources */,
-				65B3EE9A1AA26F4700C9E159 /* MainViewController.m in Sources */,
 				658B8C671A8D7CAC002E2179 /* SignalEaze.xcdatamodeld in Sources */,
 				65D3970F1A8FA3A000F9C708 /* TickMarkView.m in Sources */,
 				DC7EAF7E1AE7112400F55965 /* SEGaugeStraightViewController.m in Sources */,
@@ -332,6 +331,7 @@
 				658B8C611A8D7CAC002E2179 /* main.m in Sources */,
 				DC7D6ABA1AEABFAB008BA211 /* SEBLEInterfaceManager.m in Sources */,
 				658B8C891A8D7D8B002E2179 /* SEGaugeCurveView.m in Sources */,
+				DC7F23E21AF80973006B77D4 /* SERoundNeedleView.m in Sources */,
 				DC0BCBD91AB33BE10049AF43 /* SEGaugeLeftCurveView.m in Sources */,
 				654E902B1A9E2D7900547288 /* SEGaugeViewController.m in Sources */,
 				659D53DE1AAA02F400A6B1C8 /* SECurveNeedleView.m in Sources */,

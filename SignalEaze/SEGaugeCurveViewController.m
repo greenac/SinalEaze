@@ -10,6 +10,7 @@
 #import "SEGaugeCurveView.h"
 #import "SEGaugeLeftCurveView.h"
 #import "SEGaugeRightCurveView.h"
+#import "SECurveNeedleView.h"
 
 #define kSEGaugeCurveVCInnerRadiusModifier  .4
 #define kSEGaugeCurveVCMaxPoint             CGPointMake(CGFLOAT_MAX, CGFLOAT_MAX)
@@ -17,7 +18,7 @@
 @interface SEGaugeCurveViewController ()
 
 @property (nonatomic, strong) SEGaugeCurveView *gaugeView;
-@property (nonatomic, strong) UIView *needleView;
+@property (nonatomic, strong) SECurveNeedleView *needleView;
 @property (nonatomic, assign) CGPoint currentAnchor;
 
 
@@ -40,7 +41,7 @@
     
     CGSize nameSize = [self.displayName sizeWithAttributes:@{NSFontAttributeName:self.nameLabel.font}];
     
-    self.nameLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:.9f];
+    self.nameLabel.textColor = [UIColor grayColor];
     self.nameLabel.font = [self.nameLabel.font fontWithSize:12.0f];
     self.nameLabel.textAlignment = self.isLeft ? NSTextAlignmentRight : NSTextAlignmentLeft;
     self.nameLabel.numberOfLines = 2;
@@ -92,7 +93,8 @@
                                                             maxValue:self.maxValue
                                                         numberOfTics:self.tics
                                                              subTics:self.subTics
-                                                              radius:width];
+                                                              radius:width
+                                                              isLeft:self.isLeft];
         } else {
             _gaugeView = [[SEGaugeRightCurveView alloc] initWithFrame:self.view.frame
                                                              segments:self.segments
@@ -100,36 +102,19 @@
                                                              maxValue:self.maxValue
                                                          numberOfTics:self.tics
                                                               subTics:self.subTics
-                                                               radius:width];
+                                                               radius:width
+                                                               isLeft:self.isLeft];
         }
     }
     
     return _gaugeView;
 }
 
-- (UIView *)needleView
+- (SECurveNeedleView *)needleView
 {
     if (!_needleView) {
-        _needleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
-                                                               0.0f,
-                                                               3.0f,
-                                                               .95*self.radius)];
-        _needleView.backgroundColor = [UIColor clearColor];
-        
-        UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                     0.0f,
-                                                                     _needleView.bounds.size.width,
-                                                                     _needleView.bounds.size.height - self.innerRadius)];
-        outerView.backgroundColor = [UIColor whiteColor];
-        
-        UIView *innerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                     outerView.bounds.size.height,
-                                                                     outerView.bounds.size.width,
-                                                                     self.innerRadius)];
-        innerView.backgroundColor = [UIColor clearColor];
-        
-        [_needleView addSubview:outerView];
-        [_needleView addSubview:innerView];
+        _needleView = [[SECurveNeedleView alloc] initWithFrame:CGRectMake(0.0f,0.0f,3.0f,.95*self.radius)
+                                                   innerRadius:self.innerRadius];
     }
     
     return _needleView;
@@ -142,7 +127,7 @@
 
 - (CGFloat)innerRadius
 {
-    return kSEGaugeCurveVCInnerRadiusModifier*[self radius];
+    return kSEGaugeCurveVCInnerRadiusModifier*self.radius;
 }
 
 - (CGFloat)radius
@@ -176,6 +161,10 @@
 - (void)testNeedle
 {
     self.currentValue += 5;
+    if (self.currentValue > 1023) {
+        self.currentValue = self.minValue;
+    }
+    
     [self rotateNeedleToCurrentValue];
 }
 

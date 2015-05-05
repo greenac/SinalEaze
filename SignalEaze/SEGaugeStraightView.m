@@ -11,13 +11,7 @@
 
 #define kSEGaugeStraitViewMajorTickWidthScaler  .3
 #define kSEGaugeStraitViewMinorTickWidthScaler  .15
-#define kSEGaugeStraitViewTickHeight       2.0
-
-@interface SEGaugeStraightView()
-
-@property (nonatomic, assign) BOOL isLeft;
-
-@end
+#define kSEGaugeStraitViewTickHeight            2.0
 
 
 @implementation SEGaugeStraightView
@@ -35,9 +29,9 @@
                        maxValue:maxValue
                            tics:tics
                         subtics:subtics
-                       segments:segments];
+                       segments:segments
+                         isLeft:isLeft];
     if (self) {
-        _isLeft = isLeft;
     }
     
     return self;

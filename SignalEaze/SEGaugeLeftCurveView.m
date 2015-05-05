@@ -14,9 +14,7 @@
 {
     CGPoint a, b, c, d, center;
     CGFloat angle1, angle2;
-    
-    [[UIColor blueColor] setFill];
-    
+        
     a = CGPointMake(self.bounds.size.width, self.bounds.size.height - self.innerRadius);
     b = CGPointMake(self.bounds.size.width, self.bounds.size.height);
     c = CGPointMake(b.x, self.innerRadius);
@@ -36,11 +34,6 @@
     [self drawViewWithValues:values];
     [self drawSegments];
     [self drawTics];
-}
-
-- (CGPoint)viewCenter
-{
-    return CGPointMake(self.bounds.size.width, .5f*self.bounds.size.height);
 }
 
 - (void)drawTics

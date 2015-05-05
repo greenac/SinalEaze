@@ -8,7 +8,7 @@
 
 #import "SEGaugeCircleViewController.h"
 #import "SEGaugeCircleView.h"
-#import "SENeedleView.h"
+#import "SERoundNeedleView.h"
 
 
 
@@ -16,7 +16,7 @@
 @interface SEGaugeCircleViewController ()
 
 @property (nonatomic, strong) SEGaugeCircleView *gaugeView;
-@property (nonatomic, strong) SENeedleView *needleView;
+@property (nonatomic, strong) SERoundNeedleView *needleView;
 
 @end
 
@@ -31,10 +31,11 @@
     
     [self.view addSubview:self.gaugeView];
     
-    self.needleView = [[SENeedleView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                     0.0f,
-                                                                     7.0f,
-                                                                     .49f*self.view.frame.size.height)];
+    self.needleView = [[SERoundNeedleView alloc] initWithFrame:CGRectMake(0.0f,
+                                                                          0.0f,
+                                                                          7.0f,
+                                                                          .49f*self.view.frame.size.height)];
+                                                                     
     self.needleView.layer.anchorPoint = CGPointMake(.5, 1.0);
     [self.view addSubview:self.needleView];
 
@@ -85,6 +86,7 @@
                                   .5f*(self.view.bounds.size.height - height),
                                   width,
                                   height);
+        
         _gaugeView = [[SEGaugeCircleView alloc] initWithFrame:frame
                                                      segments:self.segments
                                                      minValue:self.minValue
@@ -101,7 +103,7 @@
 - (void)rotateNeedleToValue:(uint16_t)value
 {
     CGFloat ratio = (CGFloat)value/(CGFloat)kSEGaugeVCMaxInput;
-    CGFloat theta = ratio*[self angleFromDegreesToRadians:self.maxAngle - self.minAngle] - M_PI +[self angleFromDegreesToRadians:self.minAngle];
+    CGFloat theta = ratio*[self angleFromDegreesToRadians:self.maxAngle - self.minAngle] - M_PI + [self angleFromDegreesToRadians:self.minAngle];
     
     [self rotateNeedleToAngle:theta];
 }

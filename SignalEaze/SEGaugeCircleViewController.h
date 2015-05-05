@@ -10,5 +10,4 @@
 
 @interface SEGaugeCircleViewController : SEGaugeViewController
 
-
 @end

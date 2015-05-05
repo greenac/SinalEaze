@@ -11,6 +11,8 @@
 #import "SESegment.h"
 #import "SENeedleView.h"
 
+#define kSEGagueViewSegmentScaler   .9f
+
 @interface SEGaugeCurveView()
 
 @end
@@ -24,17 +26,18 @@
        numberOfTics:(NSUInteger)tics
             subTics:(NSUInteger)subTics
              radius:(CGFloat)radius
+             isLeft:(BOOL)isLeft
 {
     self = [super initWithFrame:frame
                        minValue:minValue
                        maxValue:maxValue
                            tics:tics
                         subtics:subTics
-                       segments:segments];
+                       segments:segments
+                         isLeft:isLeft];
     
     if (self) {
         _radius = radius;
-        _innerRadius = .4*_radius;
         self.backgroundColor = [UIColor clearColor];
     }
     
@@ -46,6 +49,15 @@
     [super layoutSubviews];
 }
 
+- (CGFloat)innerRadius
+{
+    return .4*self.radius;
+}
+
+- (CGFloat)arcRadius
+{
+    return kSEGagueViewSegmentScaler*self.radius;
+}
 
 - (CGFloat)thickness
 {
@@ -61,7 +73,7 @@
     NSNumber *angle1 = values[@(SEGaugeCurveViewDrawingValueAngle1)];
     NSNumber *angle2 = values[@(SEGaugeCurveViewDrawingValueAngle2)];
     
-    [[UIColor grayColor] setFill];
+    [[UIColor whiteColor] setFill];
     
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:a.CGPointValue];
@@ -87,6 +99,8 @@
     for (SESegment *segment in self.segments) {
         CGFloat startAngle = [self angleForValue:segment.startValue];
         CGFloat endAngle = [self angleForValue:segment.endValue];
+        CGFloat arcStartAngle = startAngle + M_PI_2;
+        CGFloat arcEndAngle = endAngle + M_PI_2;
         
         [segment.segmentColor setFill];
         
@@ -95,14 +109,14 @@
         [path moveToPoint:[self pointForAngle:startAngle radius:self.radius]];
         [path addArcWithCenter:self.viewCenter
                         radius:self.radius
-                    startAngle:startAngle + M_PI_2
-                      endAngle:endAngle + M_PI_2
+                    startAngle:arcStartAngle
+                      endAngle:arcEndAngle
                      clockwise:YES];
-        [path addLineToPoint:[self pointForAngle:endAngle radius:self.innerRadius]];
+        [path addLineToPoint:[self pointForAngle:endAngle radius:self.arcRadius]];
         [path addArcWithCenter:self.viewCenter
-                        radius:self.innerRadius
-                    startAngle:endAngle + M_PI_2
-                      endAngle:startAngle + M_PI_2
+                        radius:self.arcRadius
+                    startAngle:arcEndAngle
+                      endAngle:arcStartAngle
                      clockwise:NO];
         [path addLineToPoint:[self pointForAngle:startAngle radius:self.radius]];
         [path closePath];
@@ -131,7 +145,8 @@
 
 - (CGFloat)angleForValue:(CGFloat)value
 {
-    return value*M_PI/(self.maxValue - self.minValue);
+    CGFloat angle = value*M_PI/(self.maxValue - self.minValue);
+    return self.isLeft ? angle : 2*M_PI - angle;
 }
 
 - (CGFloat)valueForAngle:(CGFloat)angle
@@ -141,7 +156,14 @@
 
 - (CGPoint)pointForAngle:(CGFloat)angle radius:(CGFloat)radius
 {
-    return CGPointMake(self.radius - radius*sin(angle), self.radius + radius*cos(angle));
+    return CGPointMake(self.isLeft ? self.radius - radius*sin(angle) : -radius*sin(angle),
+                       self.radius + radius*cos(angle));
+}
+
+- (CGPoint)viewCenter
+{
+    return CGPointMake(self.isLeft ? self.bounds.size.width : 0.0f,
+                       .5f*self.bounds.size.height);
 }
 
 @end

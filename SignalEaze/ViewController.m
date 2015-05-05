@@ -81,6 +81,7 @@
     SESegment *segmentFuel1 = [SESegment segmentWithColor:[UIColor redColor] start:0.0 end:5.0];
     SESegment *segmentFuel2 = [SESegment segmentWithColor:[UIColor yellowColor] start:5.0 end:10];
     SESegment *segmentFuel3 = [SESegment segmentWithColor:[UIColor greenColor] start:5.0 end:23.0];
+
     NSArray *fuelSegments = @[segmentFuel1, segmentFuel3];
 
     SEGaugeCurveViewController *fuelGaugeLeft = [SEGaugeCurveViewController new];
@@ -90,7 +91,7 @@
     fuelGaugeLeft.minAngle = 30.0;
     fuelGaugeLeft.maxAngle = 330.0;
     fuelGaugeLeft.tics = 8;
-    fuelGaugeLeft.subTics = 1;
+    fuelGaugeLeft.subTics = 2;
     fuelGaugeLeft.displayName = NSLocalizedString(@"FUEL LEFT", nil);
     fuelGaugeLeft.segments = fuelSegments;
     fuelGaugeLeft.isLeft = YES;
@@ -103,7 +104,7 @@
     fuelGaugeRight.minAngle = 30;
     fuelGaugeRight.maxAngle = 330;
     fuelGaugeRight.tics = 8;
-    fuelGaugeRight.subTics = 1;
+    fuelGaugeRight.subTics = 2;
     fuelGaugeRight.displayName = NSLocalizedString(@"FUEL RIGHT", nil);
     fuelGaugeRight.segments = fuelSegments;
     fuelGaugeRight.isLeft = NO;
@@ -123,13 +124,13 @@
     ampMeter.segments = ampSegments;
     
     self.gauges = @{@(SEGaugeViewControllerIdTach):gaugeTach,
-                    @(SEGaugeViewControllerIdFuelLeft):fuelGaugeLeft,
+                    //@(SEGaugeViewControllerIdFuelLeft):fuelGaugeLeft,
                     @(SEGaugeViewControllerIdFuelRight):fuelGaugeRight,
                     @(SEGaugeViewControllerIdAmps):ampMeter
                     };
     
     NSArray *gaugeOrder = @[@(SEGaugeViewControllerIdTach),
-                            @(SEGaugeViewControllerIdFuelLeft),
+                            //@(SEGaugeViewControllerIdFuelLeft),
                             @(SEGaugeViewControllerIdFuelRight),
                             @(SEGaugeViewControllerIdAmps)
                             ];

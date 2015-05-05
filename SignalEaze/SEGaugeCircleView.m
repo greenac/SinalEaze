@@ -42,7 +42,8 @@ numOfTicsInInterval:(NSUInteger)subTics
                        maxValue:maxValue
                            tics:tics
                         subtics:subTics
-                       segments:segments];
+                       segments:segments
+                         isLeft:YES];
     
     if (self) {
         _diameter = frame.size.width;

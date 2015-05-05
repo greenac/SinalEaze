@@ -15,13 +15,16 @@
 @property (nonatomic, assign) CGFloat minValue;
 @property (nonatomic, assign) NSUInteger tics;
 @property (nonatomic, assign) NSUInteger subTics;
+@property (nonatomic, assign) BOOL isLeft;
 
 - (id)initWithFrame:(CGRect)frame
            minValue:(CGFloat)minValue
            maxValue:(CGFloat)maxValue
                tics:(NSUInteger)tics
             subtics:(NSUInteger)subtics
-           segments:(NSArray *)segments;
+           segments:(NSArray *)segments
+             isLeft:(BOOL)isLeft;
 
 - (NSUInteger)numberOfTics;
+
 @end

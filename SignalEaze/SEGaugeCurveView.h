@@ -36,11 +36,18 @@ typedef NS_ENUM(NSUInteger, SEGaugeCurveViewDrawingValue) {
            maxValue:(CGFloat)maxValue
        numberOfTics:(NSUInteger)tics
             subTics:(NSUInteger)subTics
-             radius:(CGFloat)radius;
+             radius:(CGFloat)radius
+             isLeft:(BOOL)isLeft;
 
+- (CGFloat)innerRadius;
+- (CGFloat)arcRadius;
 - (CGFloat)thickness;
 - (void)drawViewWithValues:(NSDictionary *)values;
-// methods to override
+
+/** 
+ *methods to override in children
+ *
+**/
 - (void)drawSegments;
 - (CGPoint)viewCenter;
 - (void)drawTickFromAngle:(CGFloat)fromAngle toAngle:(CGFloat)toAngle isLarge:(BOOL)isLarge;

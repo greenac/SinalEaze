@@ -45,4 +45,5 @@ typedef NS_ENUM(NSUInteger, SEGaugeViewControllerId) {
 - (void)rotateNeedleToAngle:(CGFloat)angle;
 - (void)moveNeedleToCurrentValue;
 - (CGFloat)angleFromDegreesToRadians:(CGFloat)angle;
+
 @end
